@@ -8,5 +8,10 @@ export default function TodoPage() {
     { id: 2, text: "Build a Todo App", completed: "Completed" },
     { id: 3, text: "Submit Assignment", completed: "Completed" },
   ]);
-  return <Todolist todos={todos} setTodos={setTodos} />;
+  return (
+    <>
+      <Todolist todos={todos} setTodos={setTodos} />
+      <div>Welcome to my todo page</div>
+    </>
+  );
 }
