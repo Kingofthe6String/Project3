@@ -1,26 +1,30 @@
-import React from "react";
 import { useState } from "react";
 import Todolist from "../components/Todolist";
-import { FaTrash } from "react-icons/fa";
 
 export default function TodoPage() {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
+
   const addTodo = () => {
-    if (input.trim() == "") {
-      return;
-    }
+    if (input.trim() === "") return;
     setTodos([...todos, { text: input, completed: false }]);
     setInput("");
   };
+
   const toggleTodo = (index) => {
     const updatedTodos = todos.map((todo, i) =>
       i === index ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(updatedTodos);
   };
+
+  const removeTodo = (index) => {
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    setTodos(updatedTodos);
+  };
+
   return (
-    <>
+    <div>
       <Todolist todos={todos} setTodos={setTodos} />
       <div style={{ display: "flex" }}>
         <div style={{ flex: 1, textAlign: "center" }}>
@@ -42,6 +46,18 @@ export default function TodoPage() {
                     onChange={() => toggleTodo(idx)}
                   />
                   {t.text}
+                  <button
+                    onClick={() => removeTodo(idx)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      color: "red",
+                      fontSize: "16px",
+                    }}
+                  >
+                    🗑️
+                  </button>
                 </li>
               ))}
           </ul>
@@ -67,7 +83,7 @@ export default function TodoPage() {
                   />
                   <s>{t.text}</s>
                   <button
-                    onClick={() => deleteTodo(idx)}
+                    onClick={() => removeTodo(idx)}
                     style={{
                       background: "none",
                       border: "none",
@@ -83,6 +99,6 @@ export default function TodoPage() {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }
