@@ -3,15 +3,45 @@ import { useState } from "react";
 import Todolist from "../components/Todolist";
 
 export default function TodoPage() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: "Completed" },
-    { id: 2, text: "Build a Todo App", completed: "Completed" },
-    { id: 3, text: "Submit Assignment", completed: "Completed" },
-  ]);
+  const [input, setInput] = useState("");
+  const [todos, setTodos] = useState([]);
+  const addTodo = () => {
+    if (input.trim() == "") {
+      return;
+    }
+    setTodos([...todos, { text: input }]);
+    setInput("");
+    console.log(todos);
+  };
   return (
     <>
       <Todolist todos={todos} setTodos={setTodos} />
-      <div>Welcome to my todo page</div>
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <h1>In Progress</h1>
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type a task"
+          />
+          <button onClick={addTodo}>+ / Add</button>
+          <ul>
+            {todos.map((t, idx) => (
+              <li key={idx}>{t.text}</li>
+            ))}
+          </ul>
+        </div>
+        <div
+          style={{
+            width: "5px",
+            height: "calc(100vh - 57px)",
+            background: "black",
+          }}
+        ></div>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <h1>Completed</h1>
+        </div>
+      </div>
     </>
   );
 }
