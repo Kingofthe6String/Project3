@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Todolist from "../components/Todolist";
+import { FaTrash } from "react-icons/fa";
 
 export default function TodoPage() {
   const [input, setInput] = useState("");
@@ -9,9 +10,14 @@ export default function TodoPage() {
     if (input.trim() == "") {
       return;
     }
-    setTodos([...todos, { text: input }]);
+    setTodos([...todos, { text: input, completed: false }]);
     setInput("");
-    console.log(todos);
+  };
+  const toggleTodo = (index) => {
+    const updatedTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
   };
   return (
     <>
@@ -26,9 +32,18 @@ export default function TodoPage() {
           />
           <button onClick={addTodo}>+ / Add</button>
           <ul>
-            {todos.map((t, idx) => (
-              <li key={idx}>{t.text}</li>
-            ))}
+            {todos
+              .filter((t) => !t.completed)
+              .map((t, idx) => (
+                <li key={idx}>
+                  <input
+                    type="checkbox"
+                    checked={t.completed}
+                    onChange={() => toggleTodo(idx)}
+                  />
+                  {t.text}
+                </li>
+              ))}
           </ul>
         </div>
         <div
@@ -40,6 +55,32 @@ export default function TodoPage() {
         ></div>
         <div style={{ flex: 1, textAlign: "center" }}>
           <h1>Completed</h1>
+          <ul>
+            {todos
+              .filter((t) => t.completed)
+              .map((t, idx) => (
+                <li key={idx}>
+                  <input
+                    type="checkbox"
+                    checked={t.completed}
+                    onChange={() => toggleTodo(idx)}
+                  />
+                  <s>{t.text}</s>
+                  <button
+                    onClick={() => deleteTodo(idx)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      color: "red",
+                      fontSize: "16px",
+                    }}
+                  >
+                    🗑️
+                  </button>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </>
