@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Todolist from "../components/Todolist";
-
+import "./../styles.css";
 export default function TodoPage() {
-  const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [userInput, setUserInput] = useState("myfirsttodo");
+  const [todos, setTodos] = useState([
+    { text: "make a first todo", completed: false },
+  ]);
 
   const addTodo = () => {
-    if (input.trim() === "") return;
-    setTodos([...todos, { text: input, completed: false }]);
-    setInput("");
+    if (userInput.trim() === "") return;
+    setTodos([...todos, { text: userInput, completed: false }]);
+    setUserInput("");
   };
 
   const toggleTodo = (index) => {
@@ -30,16 +32,18 @@ export default function TodoPage() {
         <div style={{ flex: 1, textAlign: "center" }}>
           <h1>In Progress</h1>
           <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
             placeholder="Type a task"
           />
-          <button onClick={addTodo}>+ / Add</button>
+          <button className="add-button" onClick={addTodo}>
+            + / Add
+          </button>
           <ul>
             {todos
               .filter((t) => !t.completed)
               .map((t, idx) => (
-                <li key={idx}>
+                <li className="in-progress-todo" key={idx}>
                   <input
                     type="checkbox"
                     checked={t.completed}
@@ -65,7 +69,7 @@ export default function TodoPage() {
         <div
           style={{
             width: "5px",
-            height: "calc(100vh - 57px)",
+            height: "calc(80vh)",
             background: "black",
           }}
         ></div>
