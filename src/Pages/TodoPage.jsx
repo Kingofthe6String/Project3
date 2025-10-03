@@ -2,7 +2,7 @@ import { useState } from "react";
 import Todolist from "../components/Todolist";
 import "./../styles.css";
 export default function TodoPage() {
-  const [userInput, setUserInput] = useState("myfirsttodo");
+  const [userInput, setUserInput] = useState("");
   const [todos, setTodos] = useState([
     { text: "make a first todo", completed: false },
   ]);
@@ -69,7 +69,7 @@ export default function TodoPage() {
         <div
           style={{
             width: "5px",
-            height: "calc(80vh)",
+            height: "calc(91vh)",
             background: "black",
           }}
         ></div>
