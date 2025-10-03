@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Todolist from "../components/Todolist";
 import "./../styles.css";
+
 export default function TodoPage() {
   const [userInput, setUserInput] = useState("");
   const [todos, setTodos] = useState([]);
@@ -24,82 +24,66 @@ export default function TodoPage() {
   };
 
   return (
-    <div>
-      <Todolist todos={todos} setTodos={setTodos} />
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 1, textAlign: "center" }}>
-          <h1>In Progress</h1>
+    <div className="todo-page-container">
+      <div className="todo-column">
+        <h2>In Progress</h2>
+        <div className="todo-input-container">
           <input
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Type a task"
+            className="todo-input"
           />
           <button className="add-button" onClick={addTodo}>
-            + / Add
+            + Add
           </button>
-          <ul>
-            {todos
-              .filter((t) => !t.completed)
-              .map((t, idx) => (
-                <li className="in-progress-todo" key={idx}>
-                  <input
-                    type="checkbox"
-                    checked={t.completed}
-                    onChange={() => toggleTodo(idx)}
-                  />
-                  {t.text}
-                  <button
-                    onClick={() => removeTodo(idx)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      color: "red",
-                      fontSize: "16px",
-                    }}
-                  >
-                    🗑️
-                  </button>
-                </li>
-              ))}
-          </ul>
         </div>
-        <div
-          style={{
-            width: "5px",
-            height: "calc(91vh)",
-            background: "black",
-          }}
-        ></div>
-        <div style={{ flex: 1, textAlign: "center" }}>
-          <h1>Completed</h1>
-          <ul>
-            {todos
-              .filter((t) => t.completed)
-              .map((t, idx) => (
-                <li key={idx}>
-                  <input
-                    type="checkbox"
-                    checked={t.completed}
-                    onChange={() => toggleTodo(idx)}
-                  />
-                  <s>{t.text}</s>
-                  <button
-                    onClick={() => removeTodo(idx)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      color: "red",
-                      fontSize: "16px",
-                    }}
-                  >
-                    🗑️
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
+        <ul className="todo-list">
+          {todos
+            .filter((t) => !t.completed)
+            .map((t, idx) => (
+              <li key={idx} className="todo-item">
+                <input
+                  type="checkbox"
+                  checked={t.completed}
+                  onChange={() => toggleTodo(idx)}
+                />
+                <span className="todo-text">{t.text}</span>
+                <button
+                  onClick={() => removeTodo(idx)}
+                  className="delete-button"
+                >
+                  🗑️
+                </button>
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      <div className="divider"></div>
+
+      <div className="todo-column">
+        <h2>Completed</h2>
+        <ul className="todo-list">
+          {todos
+            .filter((t) => t.completed)
+            .map((t, idx) => (
+              <li key={idx} className="todo-item completed">
+                <input
+                  type="checkbox"
+                  checked={t.completed}
+                  onChange={() => toggleTodo(idx)}
+                />
+                <span className="todo-text">{t.text}</span>
+                <button
+                  onClick={() => removeTodo(idx)}
+                  className="delete-button"
+                >
+                  🗑️
+                </button>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
   );
