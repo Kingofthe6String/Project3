@@ -1,7 +1,117 @@
+/* ContactPage Heading */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background: #f4f7fb;
+  min-height: 100vh;
+}
+
+.contact-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+/*ContactPage Styling*/
+.contact-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.contact-input,
+.contact-textarea {
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); /* subtle glow */
+}
+
+.contact-textarea {
+  resize: none;
+  min-height: 140px;
+}
+
+.contact-button {
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.contact-button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.contact-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .contact-form {
+    padding: 1.5rem;
+    gap: 0.8rem;
+  }
+
+  .contact-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-input,
+  .contact-textarea {
+    font-size: 0.95rem;
+  }
+
+  .contact-button {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+}
+
+/*TodoPage stylings*/
 .in-progress-todo {
   margin-top: 5px;
 }
 
 .add-button {
-  color: rgb(5, 227, 5);
+  background-color: rgb(5, 227, 5);
 }
