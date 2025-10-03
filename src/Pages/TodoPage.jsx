@@ -3,9 +3,7 @@ import Todolist from "../components/Todolist";
 import "./../styles.css";
 export default function TodoPage() {
   const [userInput, setUserInput] = useState("");
-  const [todos, setTodos] = useState([
-    { text: "make a first todo", completed: false },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = () => {
     if (userInput.trim() === "") return;
